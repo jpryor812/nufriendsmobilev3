@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "HelloWorld",
-    "slug": "expo-template-default",
+    "name": "nufriends_mobile_v3",
+    "slug": "nufriendsmobilev3",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -13,13 +13,15 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jpryor812.nufriendsmobilev3"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.jpryor812.nufriendsmobilev3"
     },
     "web": {
       "bundler": "metro",
@@ -31,6 +33,18 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ace2b7c4-77f1-4ddd-b754-d740ae669370"
+      }
+    },
+    "owner": "jpryor812",
+    "updates": {
+      "url": "https://u.expo.dev/ace2b7c4-77f1-4ddd-b754-d740ae669370"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }

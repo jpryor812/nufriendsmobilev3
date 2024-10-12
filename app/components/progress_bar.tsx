@@ -1,4 +1,4 @@
-import React, { startTransition } from 'react';
+import React from 'react';
 import { View, StyleSheet, SafeAreaView, Image } from 'react-native';
 
 const ProgressBar = ({ progress }: { progress: number }) => {
@@ -6,23 +6,23 @@ const ProgressBar = ({ progress }: { progress: number }) => {
     <SafeAreaView style={styles.progress_bar_container}>
       <View style={styles.progress_bar_image_container}>
         <Image
-          source={require('./assets/images/yu_progress_bar.png')}
+          source={require('../assets/images/yu_progress_bar.png')}
           style={styles.yu_progress_bar}
         />
         <Image
-          source={require('./assets/images/mail_progress_bar.png')}
+          source={require('../assets/images/mail_progress_bar.png')}
           style={styles.mail_progress_bar}
         />
         <Image
-          source={require('./assets/images/hand_progress_bar.png')}
+          source={require('../assets/images/hand_progress_bar.png')}
           style={styles.hand_progress_bar}
         />
         <Image
-          source={require('./assets/images/trophy_emoji_progress_bar.png')}
+          source={require('../assets/images/trophy_emoji_progress_bar.png')}
           style={styles.trophy_emoji_progress_bar}
         />
         <Image
-          source={require('./assets/images/yu_progress_bar.png')}
+          source={require('../assets/images/yu_progress_bar.png')}
           style={styles.yu_progress_bar}
         />
       </View>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   mail_progress_bar: {
-    width: 20,
+    width: 18,
     resizeMode: 'contain',
     marginLeft: 80,
   },

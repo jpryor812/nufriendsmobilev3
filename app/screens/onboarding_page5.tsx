@@ -1,13 +1,49 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { View, StyleSheet, Animated, Text, Image, ScrollView } from 'react-native';
+import { View, StyleSheet, Animated, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import ProgressBar from '../components/progress_bar';
 import BigYuOnboarding from '../components/big_yu_onboarding';
+import { createStackNavigator } from '@react-navigation/stack';
+import MockMessages from './onboarding_mock_messages';
 
-const OnboardingPage5 = () => {
+const Stack = createStackNavigator();
 
+const OnboardingPage5Navigator = () => (
+    <Stack.Navigator initialRouteName="OnboardingPage5">
+      <Stack.Screen
+        name="OnboardingPage5"
+        component={OnboardingPage5}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="MockMessages"
+        component={MockMessages}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+);
+
+const OnboardingPage5 = ({ navigation })=> {
   const [displayedFriendsCount, setDisplayedFriendsCount] = useState(0);
+  const [yuFindingText, setYuFindingText] = useState("I'll Find Five Friends You'll Build a Connection With");
   const slidePosition = useRef(new Animated.Value(0)).current;
   const showNewComponents = useRef(new Animated.Value(500)).current;
+  const pointerOpacity = useRef(new Animated.Value(0)).current;
+  const pointerAnimation = useRef(
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(pointerOpacity, {
+          toValue: 1,
+          duration: 700,
+          useNativeDriver: true,
+        }),
+        Animated.timing(pointerOpacity, {
+          toValue: 0,
+          duration: 700,
+          useNativeDriver: true,
+        }),
+      ])
+    )
+  ).current;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,8 +61,23 @@ const OnboardingPage5 = () => {
         }, 1000);
       });
     }, 2500);
-    return () => clearTimeout(timer);
-  }, []);
+
+    const pointerTimer = setTimeout(() => {
+      pointerAnimation.start(); // Start the looped pointer animation here
+    }, 14000);
+    
+    const textChangeTimer = setTimeout(() => {
+      setYuFindingText("You'll click on one...");  // Change the text after 12 seconds
+    }, 13000);
+    
+    // Fix cleanup
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(pointerTimer);
+      clearTimeout(textChangeTimer);
+      pointerAnimation.stop();
+    };
+  }, []); // Added `pointerOpacity` if needed for recalculations
 
   return (
     <View style={styles.appContainer}>
@@ -44,7 +95,7 @@ const OnboardingPage5 = () => {
             resizeMode="contain"
           />
           <Text style={styles.yu_finding_friends_text}>
-            I'll Find Five Friends You'll Build a Connection With
+            {yuFindingText}
           </Text>
           <Image
             source={require('../assets/images/yu_searching1.png')}
@@ -68,13 +119,16 @@ const OnboardingPage5 = () => {
         <ScrollableContainer
           displayedFriendsCount={displayedFriendsCount}
           setDisplayedFriendsCount={setDisplayedFriendsCount}
+          pointerOpacity={pointerOpacity}
+          pointerAnimation={pointerAnimation}
+          navigation={navigation}
         />
       </Animated.View>
     </View>
   );
 };
 
-const ScrollableContainer = ({ displayedFriendsCount, setDisplayedFriendsCount }) => {
+const ScrollableContainer = ({ navigation, displayedFriendsCount, setDisplayedFriendsCount, pointerOpacity, pointerAnimation }) => {
   const friendContainers = [
     { image: require('../assets/images/profile picture.jpg'), name: 'Jpp123' },
     { image: require('../assets/images/asian_girl_avatar.jpg'), name: 'AlexD33' },
@@ -96,30 +150,48 @@ const ScrollableContainer = ({ displayedFriendsCount, setDisplayedFriendsCount }
         }).start(() => {
           setDisplayedFriendsCount((prevCount) => Math.min(prevCount + 1, 5));
         });
-      }, initialDelay + index * 2000);
+      }, initialDelay + index * 1500);
     });
   }, [animatedValues]);
 
-  return (
-    <ScrollView style={styles.scrollView}>
-        {friendContainers.map((friend, index) => (
-          <Animated.View
-            key={friend.name}
+  const handleProfilePictureClick = () => {
+    pointerAnimation.stop();
+    navigation.navigate('MockMessages');
+    // Handle additional logic for click
+  };
+
+return (
+  <ScrollView style={styles.scrollView}>
+    {friendContainers.map((friend, index) => (
+      <Animated.View
+        key={friend.name}
+        style={[
+          styles.found_friend_container,
+          { opacity: animatedValues[index] },
+        ]}
+      >
+        <TouchableOpacity onPress={friend.name === 'Jpp123' ? handleProfilePictureClick : null}>
+          <Image
+            source={friend.image}
+            style={styles.profile_picture}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+        <Text style={styles.profile_name_text}>{friend.name}</Text>
+        {friend.name === 'Jpp123' &&
+          <Animated.Image
+            source={require('../assets/images/point_up_2.png')}
             style={[
-              styles.found_friend_container,
-              { opacity: animatedValues[index] },
+              styles.pointer_finger,
+              { opacity: pointerOpacity }, // Bind pointer's opacity
             ]}
-          >
-            <Image
-              source={friend.image}
-              style={styles.profile_picture}
-              resizeMode="contain"
-            />
-            <Text style={styles.profile_name_text}>{friend.name}</Text>
-          </Animated.View>
-        ))}
-    </ScrollView>
-  );
+            resizeMode="contain"
+          />
+        }
+      </Animated.View>
+    ))}
+  </ScrollView>
+);
 };
 
 const styles = StyleSheet.create({  
@@ -207,7 +279,14 @@ const styles = StyleSheet.create({
   friend_counter_container:{
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  pointer_finger: {
+    position: 'absolute',
+    left: 25,
+    top: 40,
+    width: 35,
+    height: 35,
+  },
 });
 
-export default OnboardingPage5;
+export default OnboardingPage5Navigator;

@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   progress_bar_container: {
     alignItems: 'center', // Center the container content
     width: '90%',
-    marginTop: '-5%'
+    marginTop: '-10%'
   },
   progress_bar: {
     height: 20,

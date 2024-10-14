@@ -1,28 +1,36 @@
-import React from 'react';
-import { View, ScrollView, Text, StyleSheet, Dimensions } from 'react-native';
-
-// Define the structure of a message
+import React, { useRef, useEffect } from 'react';
+import { View, ScrollView, Text, StyleSheet, Animated } from 'react-native';
 interface Message {
   id: string;
   text: string;
   isSent: boolean;
+  opacity?: Animated.Value;
 }
-
-// Props for the MessageContainer component
 interface MessageContainerProps {
   messages: Message[];
+  style?: object;
 }
-
-const MessageContainer: React.FC<MessageContainerProps> = ({ messages }) => {
+const MessageContainer: React.FC<MessageContainerProps> = ({ messages, style }) => {
+  const scrollViewRef = useRef<ScrollView>(null);
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+  const scrollToBottom = () => {
+    scrollViewRef.current?.scrollToEnd({ animated: true });
+  };
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+    <View style={[styles.container, style]}>
+      <ScrollView 
+        ref={scrollViewRef}
+        contentContainerStyle={styles.scrollContent}
+      >
         {messages.map((message) => (
-          <View
+          <Animated.View
             key={message.id}
             style={[
               styles.messageWrapper,
               message.isSent ? styles.sentWrapper : styles.receivedWrapper,
+              { opacity: message.opacity || 1 },
             ]}
           >
             <View
@@ -40,25 +48,19 @@ const MessageContainer: React.FC<MessageContainerProps> = ({ messages }) => {
                 {message.text}
               </Text>
             </View>
-          </View>
+          </Animated.View>
         ))}
       </ScrollView>
     </View>
   );
 };
 
-const { height } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
   container: {
-    height: height * 0.5, // 50% of screen height
-    width: '95%',
-    borderColor: '#ccc',
-    borderRadius: 20,
-    margin: 10,
+    flex: 1,
   },
   scrollContent: {
-    padding: 10,
+    paddingVertical: 10,
   },
   messageWrapper: {
     flexDirection: 'row',

@@ -60,11 +60,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingVertical: 10,
+    paddingVertical: 8,
   },
   messageWrapper: {
     flexDirection: 'row',
-    marginBottom: 10,
+    padding: 8,
   },
   sentWrapper: {
     justifyContent: 'flex-end',

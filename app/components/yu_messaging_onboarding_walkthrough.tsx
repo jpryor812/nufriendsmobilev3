@@ -1,20 +1,38 @@
-import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
-
-const BigYuOnboardingMessages = ({ text }: { text:string }) => {
+import React, { useEffect, useRef } from 'react';
+import { View, StyleSheet, Image, Text, Animated } from 'react-native';
+interface BigYuOnboardingMessagesProps {
+  text: string;
+  fontSize?: number;
+}
+const BigYuOnboardingMessages: React.FC<BigYuOnboardingMessagesProps> = ({ text, fontSize = 14 }) => {
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+  useEffect(() => {
+    Animated.sequence([
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, [text]);
   return (
     <View style={styles.container}>
       <Image
         source={require('../assets/images/big_yu_question_onboarding.png')}
         style={styles.big_yu_question_onboarding_side}
         resizeMode='contain' />
-          <View style={styles.big_yu_chat_bubble_container_side}>
-              <Image
-                  source={require('../assets/images/yu_chat_bubble_side.png')}
-                  style={styles.big_yu_chat_bubble_side}
-                  resizeMode='contain' />
-              <Text style={styles.big_yu_text}>{text}</Text>
-          </View>
+      <View style={styles.big_yu_chat_bubble_container_side}>
+        <Image
+          source={require('../assets/images/yu_chat_bubble_side.png')}
+          style={styles.big_yu_chat_bubble_side}
+          resizeMode='contain' />
+        <Animated.Text style={[styles.big_yu_text, { fontSize, opacity: fadeAnim }]}>{text}</Animated.Text>
+      </View>
     </View>
   );
 };

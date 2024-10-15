@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     flexDirection: 'row',
+    marginTop: -30,
   },
   friendContainer: {
     flex: 1,

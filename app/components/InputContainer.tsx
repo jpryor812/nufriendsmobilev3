@@ -4,6 +4,8 @@ import { View, TextInput, TouchableOpacity, Text, StyleSheet, Platform } from 'r
 interface InputContainerProps {
   onSendMessage: (message: string) => void;
   onHeightChange: (height: number) => void;
+  width?: string | number;
+  maxHeight?: number;
 }
 
 const InputContainer: React.FC<InputContainerProps> = ({ onSendMessage, onHeightChange }) => {
@@ -49,21 +51,20 @@ const InputContainer: React.FC<InputContainerProps> = ({ onSendMessage, onHeight
 
 const styles = StyleSheet.create({
   inputContainer: {
-    width: '95%',
-    padding: 10,
-    backgroundColor: '#fff',
-    borderTopWidth: 1,
-    borderTopColor: '#ccc',
+    width: '90%',
     flexDirection: 'row',
     alignItems: 'flex-end',
+    marginRight: 5,
+    marginBottom: 10,
   },
   input: {
     flex: 1,
+    backgroundColor: '#fff',
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 20,
-    paddingHorizontal: 15,
-    paddingTop: Platform.OS === 'ios' ? 10 : 0,
+    paddingHorizontal: 20,
+    paddingTop: Platform.OS === 'ios' ? 10 : 10,
     paddingBottom: Platform.OS === 'ios' ? 10 : 0,
     fontSize: 16,
     marginRight: 10,

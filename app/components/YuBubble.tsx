@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
     marginBottom: -60,
   },
   bubble: {
-    backgroundColor: '#F9FEFF',
-    borderColor: '#C6F1FF',
+    backgroundColor: '#FFF',
+    borderColor: '#CCC',
     borderWidth: 1.5,
     borderRadius: 20,
     padding: 9,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 0,
   },
   bubbleText: {
-    color: '#b2b2b2',
+    color: '#42ade2',
     fontSize: 12,
     fontFamily: 'Helvetica Neue',
   },

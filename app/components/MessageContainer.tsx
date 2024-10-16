@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   messageWrapper: {
     flexDirection: 'row',
-    padding: 8,
+    padding: 10,
   },
   sentWrapper: {
     justifyContent: 'flex-end',
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   messageBubble: {
     maxWidth: '80%',
-    padding: 10,
+    padding: 12,
     borderRadius: 20,
   },
   sentBubble: {
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 0,
   },
   messageText: {
-    fontSize: 15,
+    fontSize: 16,
   },
   sentText: {
     color: '#F1F3F5',

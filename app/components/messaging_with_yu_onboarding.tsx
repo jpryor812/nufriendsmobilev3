@@ -228,7 +228,7 @@ setTimeout(() => {
 
   // Calculate the initial height for MessageContainer
   const initialMessageContainerHeight = SCREEN_HEIGHT - 
-    (60 + 50 + 40 + // ProgressBar height (estimate) + FriendProfile height (estimate)
+    (60 + 50 + 10 + // ProgressBar height (estimate) + FriendProfile height (estimate)
      inputContainerHeight);
   // Use messageContainerAnim to dynamically adjust the height
   const messageContainerHeight = messageContainerAnim.interpolate({
@@ -648,6 +648,14 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomColor: '#F5F5F5',
     borderBottomWidth: 3,
+  },
+  inputContainer: {
+    position: 'absolute',
+    left: '5%',
+    right: '5%',
+    bottom: '2%',  // This will position it 2% from the bottom
+    flexDirection: 'row',
+    alignItems: 'flex-end',
   },
   inputWrapper: {
     flexDirection: 'row',

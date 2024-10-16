@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { View, StyleSheet, Animated, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import ProgressBar from '../components/progress_bar';
 import BigYuOnboarding from '../components/big_yu_onboarding';
+import ChatBubble from '../components/ChatBubble';
 import { createStackNavigator } from '@react-navigation/stack';
 import MockMessages from './onboarding_mock_messages';
 
@@ -25,7 +26,7 @@ const OnboardingPage5Navigator = () => (
 const OnboardingPage5 = ({ navigation })=> {
   const [displayedFriendsCount, setDisplayedFriendsCount] = useState(0);
   const [yuFindingText, setYuFindingText] = useState("I'll Find Five Friends You'll Build a Connection With");
-  const slidePosition = useRef(new Animated.Value(0)).current;
+  const slidePosition = useRef(new Animated.Value(200)).current;
   const showNewComponents = useRef(new Animated.Value(500)).current;
   const pointerOpacity = useRef(new Animated.Value(0)).current;
   const pointerAnimation = useRef(
@@ -48,13 +49,13 @@ const OnboardingPage5 = ({ navigation })=> {
   useEffect(() => {
     const timer = setTimeout(() => {
       Animated.timing(slidePosition, {
-        toValue: 900,
-        duration: 600,
+        toValue: 1500,
+        duration: 700,
         useNativeDriver: true,
       }).start(() => {
         setTimeout(() => {
           Animated.timing(showNewComponents, {
-            toValue: -500,
+            toValue: -360,
             duration: 600,
             useNativeDriver: true,
           }).start();
@@ -89,14 +90,14 @@ const OnboardingPage5 = ({ navigation })=> {
         style={[styles.newComponentContainer, { transform: [{ translateY: showNewComponents }] }]}
       >
         <View style={styles.yu_finding_friends_container}>
-          <Image
-            source={require('../assets/images/yu_searching_chat_bubble.png')}
-            style={styles.yu_searching_chat_bubble}
-            resizeMode="contain"
-          />
-          <Text style={styles.yu_finding_friends_text}>
-            {yuFindingText}
-          </Text>
+            <Image
+              source={require('../assets/images/yu_searching_chat_bubble.png')}
+              style={styles.yu_searching_chat_bubble}
+              resizeMode="contain"
+            />
+            <Text style={styles.yu_finding_friends_text}>
+              {yuFindingText}
+            </Text>
           <Image
             source={require('../assets/images/yu_searching1.png')}
             style={styles.yu_searching1}
@@ -161,7 +162,7 @@ const ScrollableContainer = ({ navigation, displayedFriendsCount, setDisplayedFr
   };
 
 return (
-  <ScrollView style={styles.scrollView}>
+  <View style={styles.scrollView}>
     {friendContainers.map((friend, index) => (
       <Animated.View
         key={friend.name}
@@ -190,7 +191,7 @@ return (
         }
       </Animated.View>
     ))}
-  </ScrollView>
+  </View>
 );
 };
 
@@ -250,11 +251,11 @@ const styles = StyleSheet.create({
   },  
   found_friend_container: {
     flexDirection: 'row',
-    height: '15%',
+    height: '20%',
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginTop: 10,
-    padding: 10,
+    padding: 9,
   },
   profile_picture:{
     width: 50,

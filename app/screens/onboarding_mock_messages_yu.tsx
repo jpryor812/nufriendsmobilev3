@@ -31,7 +31,7 @@ const MockMessagesYu = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       Animated.timing(slideAnim, {
-        toValue: SCREEN_HEIGHT,
+        toValue: SCREEN_HEIGHT*2,
         duration: 1000,
         useNativeDriver: true,
       }).start(({finished}) => {
@@ -44,7 +44,7 @@ const MockMessagesYu = () => {
           }).start();
         }
       });
-    }, 2000);
+    }, 1500);
     return () => clearTimeout(timer);
   }, [slideAnim, fadeAnim]);
 

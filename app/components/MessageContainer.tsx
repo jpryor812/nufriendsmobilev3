@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 0,
   },
   messageText: {
-    fontSize: 16,
+    fontSize: 15,
   },
   sentText: {
     color: '#F1F3F5',

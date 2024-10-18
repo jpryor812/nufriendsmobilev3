@@ -22,12 +22,14 @@ interface MessagingWithYuOnboardingProps {
     image: any;
     name: string;
   };
+  onFriendProfilePress: () => void; 
 }
 
 const MessagingWithYuOnboarding: React.FC<MessagingWithYuOnboardingProps> = ({ 
   progress, 
   initialMessages, 
-  friend
+  friend,
+  onFriendProfilePress,
 }) => {
   const buttons = [
      'Ask JPP123 what he likes to do for fun',
@@ -516,6 +518,7 @@ setTimeout(() => {
           <FriendProfile
             imageSource={friend.image}
             name={friend.name}
+            onPress={onFriendProfilePress}
           />
         )}
       </View>

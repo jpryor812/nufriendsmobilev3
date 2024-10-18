@@ -1,19 +1,29 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView, Platform, Dimensions, Animated } from 'react-native';
+import { View, StyleSheet, KeyboardAvoidingView, Platform, Dimensions, Animated, TouchableOpacity } from 'react-native';
 import ProgressBar from '../components/progress_bar';
 import BigYuOnboardingMessages from '../components/yu_messaging_onboarding_walkthrough';
 import FriendProfile from '../components/friend_profile';
 import MessageContainer from '../components/MessageContainer';
 import InputContainer from '../components/InputContainer';
 import MessagingWithYuOnboarding from '../components/messaging_with_yu_onboarding';
+import { useNavigation } from '@react-navigation/native';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const MockMessagesYu = () => {
+  const navigation = useNavigation();
+  
+  const handleFriendProfilePress = () => {
+    console.log('Friend profile pressed');
+    navigation.navigate('RelationshipTracker', { friendName: 'Jpp123' });
+  };
+      
+  
   const [yuFindingText, setYuFindingText] = useState("One moment...");
   const slideAnim = useRef(new Animated.Value(0)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const [showNewComponent, setShowNewComponent] = useState(false);
+
 
   const initialMessages = [
     { id: '1', text: "Hi! I see you're from Pittsburgh. Did you enjoy growing up there?", isSent: false },
@@ -66,18 +76,6 @@ const MockMessagesYu = () => {
     setInputContainerHeight(height);
   }, []);
 
-  const FriendList = () => (
-    <View style={styles.friendListContainer}>
-      {friends.map((friend, index) => (
-        <FriendProfile
-          key={index}
-          imageSource={friend.image}
-          name={friend.name}
-        />
-      ))}
-    </View>
-  );
-
   // Calculate the height for MessageContainer
   const messageContainerHeight = SCREEN_HEIGHT - 
     (60 + // ProgressBar height (estimate)
@@ -100,10 +98,16 @@ return (
       >
         <ProgressBar progress={35} />
         <BigYuOnboardingMessages text={yuFindingText} />
-        <FriendList />
-        <View style={[styles.messageContainerWrapper, { height: messageContainerHeight }]}>
-          <MessageContainer messages={messages} />
-        </View>
+
+        {friends.map((friend, index) => (
+          <TouchableOpacity key={index} onPress={handleFriendProfilePress}>
+            <FriendProfile
+              imageSource={friend.image}
+              name={friend.name}
+            />
+          </TouchableOpacity>
+        ))}
+
         <InputContainer 
           onSendMessage={handleSendMessage} 
           onHeightChange={handleInputHeightChange}
@@ -117,10 +121,14 @@ return (
           { opacity: fadeAnim }
         ]}
       >
-        <MessagingWithYuOnboarding 
-          progress={40} 
-          initialMessages={initialMessages} 
-          friend={{ image: require('../assets/images/profile picture.jpg'), name: 'Jpp123' }} />
+        <View style={styles.container}>
+          <MessagingWithYuOnboarding 
+            progress={40} 
+            initialMessages={initialMessages} 
+            friend={{ image: require('../assets/images/profile picture.jpg'), name: 'Jpp123' }}
+            onFriendProfilePress={handleFriendProfilePress}
+          />
+        </View>
       </Animated.View>
     )}
   </View>
@@ -150,6 +158,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingTop: 20,
+    zIndex: 2333,
   },
   messageContainerWrapper: {
     width: '100%',

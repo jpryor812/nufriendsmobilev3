@@ -1,14 +1,18 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
-const FriendProfile = ({ imageSource, name }) => {
+const FriendProfile = ({ imageSource, name, onPress }) => {
+  const ContentComponent = onPress ? TouchableOpacity : View;
   return (
-    <View style={styles.friend_profile_container}>
+    <ContentComponent 
+      onPress={onPress} 
+      style={styles.friend_profile_container}
+    >
       <View style={styles.friendContainer}>
         <Image source={imageSource} style={styles.profilePicture} resizeMode="contain" />
         <Text style={styles.profileNameText}>{name}</Text>
       </View>
-    </View>
+    </ContentComponent>
   );
 };
 

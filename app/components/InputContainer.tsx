@@ -97,10 +97,9 @@ const InputContainer: React.FC<InputContainerProps> = ({ onSendMessage, onHeight
 
 const styles = StyleSheet.create({
   inputContainer: {
-    position: 'absolute',
     left: '5%',
     right: '5%',
-    bottom: '2%',
+    bottom: '5%',
     flexDirection: 'row',
     alignItems: 'flex-end',
   },

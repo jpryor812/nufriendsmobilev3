@@ -2,7 +2,7 @@
   "expo": {
     "name": "nufriends_mobile_v3",
     "slug": "nufriendsmobilev3",
-    "version": "1.0.0",
+    "runtimeVersion": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -43,8 +43,5 @@
     "updates": {
       "url": "https://u.expo.dev/ace2b7c4-77f1-4ddd-b754-d740ae669370"
     },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    }
   }
 }

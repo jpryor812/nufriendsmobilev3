@@ -14,7 +14,10 @@ const messages = [
   { id: '3', userId: 'Jpp123', text: "Yeah I really like dinosaurs. My favorite is a velociraptor but I also really like Ankylosaurus and Ticeratops", timestamp: "4:45 pm" },
 { id: '4', userId: 'Jpp123', text: "Yeah I really like dinosaurs. My favorite is a velociraptor but I also really like Ankylosaurus and Ticeratops", timestamp: "4:45 pm" },
 { id: '5', userId: 'Jpp123', text: "Yeah I really like dinosaurs. My favorite is a velociraptor but I also really like Ankylosaurus and Ticeratops", timestamp: "4:45 pm" },
-
+  { id: '6', userId: 'Jpp123', text: "Yeah I really like dinosaurs. My favorite is a velociraptor but I also really like Ankylosaurus and Ticeratops", timestamp: "4:45 pm" },
+  { id: '7', userId: 'Jpp123', text: "Yeah I really like dinosaurs. My favorite is a velociraptor but I also really like Ankylosaurus and Ticeratops", timestamp: "4:45 pm" },
+  { id: '8', userId: 'Jpp123', text: "Yeah I really like dinosaurs. My favorite is a velociraptor but I also really like Ankylosaurus and Ticeratops", timestamp: "4:45 pm" },
+  { id: '9', userId: 'Jpp123', text: "Yeah I really like dinosaurs. My favorite is a velociraptor but I also really like Ankylosaurus and Ticeratops", timestamp: "4:45 pm" },
 ];
 
 const Avatar = ({ userId }) => {

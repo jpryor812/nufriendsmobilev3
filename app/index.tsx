@@ -1,9 +1,12 @@
 import React from 'react';
-import { SafeAreaView, View, StyleSheet, Platform, StatusBar } from 'react-native';
+import { SafeAreaView, View, StyleSheet, Platform, StatusBar, TouchableOpacity, Text, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import HeaderButtons from './components/header_buttons';
 import MessageList from './components/messages_list';
 import FooterNavigation from './components/FooterNavigation';
-const App = () => {
+
+const HomePage = () => {
+  const navigation = useNavigation();
   
   const handleFindFriends = () => {
     console.log('Find New Friends pressed');
@@ -11,6 +14,13 @@ const App = () => {
   const handleUpgrade = () => {
     console.log('Upgrade to Premium pressed');
   };
+  const handleSeeMore = () => {
+    // Add your logic for "See More" functionality
+    console.log("See More pressed");
+  };
+  const navigateToProfile = () => {
+    navigation.navigate('Profile');
+  }
   
   return (
     <SafeAreaView style={styles.container}>
@@ -18,10 +28,16 @@ const App = () => {
         onPressFindFriends={handleFindFriends}
         onPressUpgrade={handleUpgrade}
       />
+      <View style={styles.introContainer}>
+        <Text style={styles.welcomeBackMessage}>Welcome back, Justin! You’ve made 4 new friends and sent 123 messages this week!</Text>
+          <TouchableOpacity style={styles.seeMore} onPress={navigateToProfile}>
+            <Text>See More</Text>
+          </TouchableOpacity>
+      </View>    
       <View style={styles.messageContainer}>
         <MessageList />
       </View>
-        <FooterNavigation />
+        <FooterNavigation onProfilePress={navigateToProfile} />
     </SafeAreaView>
   );
 };
@@ -30,9 +46,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f0f9ff',
   },
+  introContainer: {
+    width: '80%',
+    aligntItems: 'center',
+    alignSelf: 'center',
+  },
+  welcomeBackMessage: {
+    fontStyle: 'italic',
+    fontSize: 13,
+    fontColor: '#9d9d9d',
+    marginTop: 10,
+  },
+  seeMore: {
+    textDecorationLine: 'underline',
+    fontSize: 12,
+    fontColor: '#9d9d9d',
+    alignSelf: 'flex-end',
+    marginBottom: 5
+  },
   messageContainer: {
     flex: 1,
   }
 });
 
-export default App;
+export default HomePage;

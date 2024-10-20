@@ -1,58 +1,38 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { createStackNavigator, TransitionSpecs } from '@react-navigation/stack';
-import OnboardingPage2 from './screens/onboarding_page2';
-import ProgressBar from './components/progress_bar';
-import BigYuOnboarding from './components/big_yu_onboarding';
-
-const Stack = createStackNavigator();
-
-const HomePage = ({ navigation }: { navigation: any }) => (
-  <View style={styles.appContainer}>
-    <ProgressBar progress={5} />
-    <BigYuOnboarding text="Hi! I'm Yu." />
-
-    {/* Continue button with navigation */}
-    <TouchableOpacity
-      style={styles.continue_button_container}
-      onPress={() => navigation.navigate('OnboardingPage2')}
-    >
-      <Text style={styles.continue_button_text}>Continue</Text>
-    </TouchableOpacity>
-  </View>
-);
-
+import { SafeAreaView, View, StyleSheet, Platform, StatusBar } from 'react-native';
+import HeaderButtons from './components/header_buttons';
+import MessageList from './components/messages_list';
+import FooterNavigation from './components/FooterNavigation';
 const App = () => {
+  
+  const handleFindFriends = () => {
+    console.log('Find New Friends pressed');
+  };
+  const handleUpgrade = () => {
+    console.log('Upgrade to Premium pressed');
+  };
+  
   return (
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
-        <Stack.Screen name="OnboardingPage2" component={OnboardingPage2} options={{ headerShown: false }} />
-      </Stack.Navigator>
+    <SafeAreaView style={styles.container}>
+      <HeaderButtons 
+        onPressFindFriends={handleFindFriends}
+        onPressUpgrade={handleUpgrade}
+      />
+      <View style={styles.messageContainer}>
+        <MessageList />
+      </View>
+        <FooterNavigation />
+    </SafeAreaView>
   );
 };
-
 const styles = StyleSheet.create({
-  appContainer: {
+  container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginTop: 0,
-    backgroundColor: '#F0FCFE',
+    backgroundColor: '#f0f9ff',
   },
-  continue_button_container: {
-    width: '90%',
-    height: '6%',
-    backgroundColor: '#6ECFFF',
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: '10%',
-  },
-  continue_button_text: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-  },
+  messageContainer: {
+    flex: 1,
+  }
 });
 
 export default App;

@@ -6,23 +6,23 @@ const ProgressBar = ({ progress }: { progress: number }) => {
     <SafeAreaView style={styles.progress_bar_container}>
       <View style={styles.progress_bar_image_container}>
         <Image
-          source={require('../assets/images/yu_progress_bar.png')}
+          source={require('../assets/yu_progress_bar.png')}
           style={styles.yu_progress_bar}
         />
         <Image
-          source={require('../assets/images/mail_progress_bar.png')}
+          source={require('../assets/mail_progress_bar.png')}
           style={styles.mail_progress_bar}
         />
         <Image
-          source={require('../assets/images/hand_progress_bar.png')}
+          source={require('../assets/yu_progress_bar.png')}
+          style={styles.yu_progress_bar}
+        />
+        <Image
+          source={require('../assets/hand_progress_bar.png')}
           style={styles.hand_progress_bar}
         />
         <Image
-          source={require('../assets/images/trophy_emoji_progress_bar.png')}
-          style={styles.trophy_emoji_progress_bar}
-        />
-        <Image
-          source={require('../assets/images/yu_progress_bar.png')}
+          source={require('../assets/Yu_excited_no_speech.png')}
           style={styles.yu_progress_bar}
         />
       </View>
@@ -35,7 +35,7 @@ const ProgressBar = ({ progress }: { progress: number }) => {
 
 
 const styles = StyleSheet.create({
-  
+
   progress_bar_container: {
     alignItems: 'center', // Center the container content
     width: '90%',
@@ -71,17 +71,13 @@ const styles = StyleSheet.create({
   mail_progress_bar: {
     width: 18,
     resizeMode: 'contain',
-    marginLeft: 80,
+    marginRight: -40,
+    marginLeft: -10
   },
   hand_progress_bar: {
     width: 20,
     resizeMode: 'contain',
-    marginLeft: 20,
-  },
-  trophy_emoji_progress_bar: {
-    width: 20,
-    resizeMode: 'contain',
-    marginLeft: 10,
+    marginLeft: 50,
   },
 });
 

@@ -30,9 +30,9 @@ const HomePage = () => {
       />
       <View style={styles.introContainer}>
         <Text style={styles.welcomeBackMessage}>Welcome back, Justin! You’ve made 4 new friends and sent 123 messages this week!</Text>
-          <TouchableOpacity style={styles.seeMore} onPress={navigateToProfile}>
-            <Text>See More</Text>
-          </TouchableOpacity>
+        <TouchableOpacity onPress={navigateToProfile}>
+          <Text style={styles.seeMore}>See More</Text>
+        </TouchableOpacity>
       </View>    
       <View style={styles.messageContainer}>
         <MessageList />
@@ -44,23 +44,22 @@ const HomePage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f9ff',
+    backgroundColor: '#F0FCFE',
   },
   introContainer: {
     width: '80%',
-    aligntItems: 'center',
     alignSelf: 'center',
   },
   welcomeBackMessage: {
     fontStyle: 'italic',
     fontSize: 13,
-    fontColor: '#9d9d9d',
+    color: '#9d9d9d',
     marginTop: 10,
   },
   seeMore: {
     textDecorationLine: 'underline',
-    fontSize: 12,
-    fontColor: '#9d9d9d',
+    fontSize: 13,
+    color: '#9d9d9d',
     alignSelf: 'flex-end',
     marginBottom: 5
   },

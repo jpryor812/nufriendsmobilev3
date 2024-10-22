@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
 
+const profileIcon = require('../assets/profile picture.jpg');
+
 const users = {
   'Jpp123': {
-    avatar: 'https://example.com/avatar.jpg',
+    avatar: require('../assets/profile picture.jpg'),
     initials: 'JP'
   }
 };
@@ -25,7 +27,10 @@ const Avatar = ({ userId }) => {
   return (
     <View style={styles.avatarContainer}>
       {user.avatar ? (
-        <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
+        <Image 
+          source={typeof user.avatar === 'string' ? { uri: user.avatar } : user.avatar} 
+          style={styles.avatarImage} 
+        />
       ) : (
         <Text style={styles.avatarText}>{user.initials}</Text>
       )}
@@ -91,6 +96,11 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
 
+  },
+  avatarImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 25
   },
   textContainer: {
     flex: 1,

@@ -7,6 +7,8 @@ import FriendProfile from './friend_profile';
 import YuBubble from './YuBubble';
 import SuggestChangesInput from './SuggestChangesInput';
 
+/* build componenets that do their own animations and then bring them all into the screen with animations */
+
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
 
 interface Message {
